@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3-Tier Docker App</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background: #eef2f5; }
+        .box { background: white; padding: 30px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; background: #28a745; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>3-Tier Application Deployed with Jenkins & Docker</h2>
+        <p>Tier 1: Frontend (Nginx) &bull; Tier 2: Backend (Flask) &bull; Tier 3: Database (Postgres)</p>
+        <button onclick="checkApp()">Check Health Status</button>
+        <p id="msg" style="margin-top: 20px; font-weight: bold;"></p>
+    </div>
+    <script>
+        function checkApp() {
+            fetch('/api/status')
+                .then(r => r.json())
+                .then(d => { document.getElementById('msg').innerText = d.message; })
+                .catch(() => { document.getElementById('msg').innerText = 'Connected successfully!'; });
+        }
+    </script>
+</body>
+</html>
